@@ -1,9 +1,23 @@
 const numerics = require('./numerics.json');
 
+/**
+ * 
+ * @param {Array<Number>} numArr
+ * @description This function just return the notation of each number in the group joined by
+ * a hyphen (-). For example - [100, 1] -> cent-un.
+ * @returns {String}
+ */
 const getNotations = (numArr) => {
     return numArr.map(n => numerics[n]).join('-');
 }
 
+/**
+ * 
+ * @param {Number} num 
+ * @returns {Array<Number>}
+ * @description This function is used to separate the numbers into separate groupings. 
+ * For example - 1011 -> [1000, 11]
+ */
 const groupNum = (num) => {
     let parts = [];
     let startDiv = 100;
@@ -42,6 +56,11 @@ const groupNum = (num) => {
     return parts;
 }
 
+/**
+ * 
+ * @param {Array<Number>} parts 
+ * @description This function is used to clean the parts where in some numbers may still be in non transformable format.
+ */
 const cleanGroup = (parts) => {
     parts.forEach((part, index) => {
         if (part === 1 && [100, 1000].includes(parts[index + 1])) {
@@ -57,6 +76,12 @@ const cleanGroup = (parts) => {
     });
 }
 
+/**
+ * 
+ * @param {Number} num 
+ * @returns {String}
+ * @description Main function to convert number to string.
+ */
 const getFrenchNotation = (num) => {
     const numStr = num.toString();
     if (numerics[numStr]) return numerics[numStr];
